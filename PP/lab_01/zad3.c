@@ -53,17 +53,14 @@ int sum(int *tab, int n)
 
     for(int i = 0; i < n; i++)
     {
-        for(int j = i+1; j < n; j++)
-        {
-            // find min value
-            if(*(tab+j) < *(tab+i) && *(tab+i) <= min)
-                min = *(tab+j);
-            // find max value
-            else if(*(tab+j) > *(tab+i) && *(tab+i) >= max)
-                max = *(tab+j);
-            else
-                continue;
-        }
+        // find min value
+        if(*(tab+i) < min)
+            min = *(tab+i);
+        
+        // find max value
+        else if(*(tab+i) > max)
+            max = *(tab+i);    
+
         // calculate sum
         sum += *(tab+i);
     }
