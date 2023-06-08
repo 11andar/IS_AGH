@@ -1,0 +1,41 @@
+3. W funkcji main proszę utworzyć dwuwymiarową tablicę liczb rzeczywistych abc o pięciu wierszach i czterech kolumnach,
+    
+    a) ( 1 ) zainicjować ją wartościami z przedziału od <-10.0, 10.0> i wypisać wierszami procedurą wypisz_d 
+          (w wywołaniach nie używamy operatora &) .
+
+    b) ( 1 ) Wykorzystując funkcję suma (w wywołaniach nie używamy operatora &).
+        policzyć i wypisać sumę elementów z całej tablicy abc wykorzystać tylko identyfikator abc
+        double suma_all = suma (..............., .................);
+    
+        policzyć i wypisać sumę elementów z pierwszej połowy tablicy abc wykorzystać tylko identyfikator abc
+        double suma_1 = suma (..............., ...............);
+
+        policzyć i wypisać sumę elementów z drugiej połowy tablicy abc wykorzystać tylko identyfikator abc
+        double suma_2 = suma (..............., ...............);
+
+    c) ( 2 ) Proszę napisać funkcję ....row_number(..., .....);, która zwraca numer wiersza, w którym znajduje się maksymalny 
+        element w przekazanej do funkcji tablicy dwuwymiarowej o czteroelementowych wierszach -
+        funkcję należy przetestować dla tablicy abc wypisać znaleziony numer, a potem procedurą wypisz_d (w wywołaniu nie używamy operatora &) wypisać wartości elementów wyznaczonego wiersza. 
+    
+        Proszę ograniczyć ilość wykorzystywanych zmiennych do niezbędnego minimum
+
+    d) ( 2 ) Mamy funkcję, zwracającą wskaźnik do elementu minimalnego w tablicy jednowymiarowej
+        
+        double *find_min_wsk (double *T_F, double *T_L){ //poczatek i koniec obszaru tablicy gdzie szukamy minimum
+        
+            double *min = T_F++;
+
+            while (T_F < T_L)
+            {
+                if(*min > *T_F) 
+                    min = T_F;
+                T_F++;
+            }
+        return min;}
+
+        Wykorzystując funkcję find_min_wsk proszę napisać funkcję fun_find ( nie używamy operatora &), która zwraca wskaźnik 
+        do wartości minimalnej w tablicy dwuwymiarowej. Funkcja ma być skonstruowana tak aby, dla tablicy abc wywołanie wyglądało następująco:
+
+        double* MIN_WSK = fun_find(abc, 5);
+        
+        Na podstawie wskaźnika MIN_WSK proszę wyliczyć (najlepiej bez użycia pętli oraz operatora &) oba indeksy (numer wiersza i numer kolumny) znalezionego elementu, wypisać je oraz wypisać znalezioną wartość.
