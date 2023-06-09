@@ -7,6 +7,8 @@
 void print_d(double *beg, double *end);
 double sum(double *beg, double *end);
 int row_number(double *beg, double *end);
+double *find_min_ptr(double *beg, double *end);
+double *fun_find(double (*tab)[COLS], int rows);
 
 int main(void)
 {
@@ -26,6 +28,7 @@ int main(void)
     // print abc row by row
     for(int i = 0; i < ROWS; i++)
         print_d(*(abc+i), *(abc+i)+COLS);
+    printf("\n");
 
     // calculate sum
     double sum_all = sum(*abc, *(abc+ROWS));
@@ -42,7 +45,7 @@ int main(void)
     double sum_2 = sum(*(abc+rows_h)+cols_h, *(abc+ROWS));
     
     // print sum, sum_1, sum_2
-    printf("\nSum of all elements: %.1f\n", sum_all);
+    printf("Sum of all elements: %.1f\n", sum_all);
     printf("Sum of first half: %.1f\n", sum_1);
     printf("Sum of first half: %.1f\n\n", sum_2);
     
@@ -51,6 +54,17 @@ int main(void)
 
     printf("Row with max value: ");
     print_d(*(abc+max_row), *(abc+max_row)+COLS);
+    printf("\n");
+
+    // get a pointer to min value in abc
+    double *min_ptr = fun_find(abc, ROWS);
+
+    // print min value
+    printf("min: %.1f\n", *min_ptr);
+    
+    // print row and column of min value
+    printf("min_row: %ld\n", (min_ptr-*abc)/COLS);
+    printf("min_col: %ld\n", (min_ptr-*abc)%COLS);
     
     return 0;
 }
@@ -91,4 +105,33 @@ int row_number(double *beg, double *end)
     printf("max: %.1f\n", *max_ptr);
 
     return (max_ptr-beg)/COLS;
+}
+
+double *find_min_ptr(double *beg, double *end)
+{
+    double *min = beg++;
+
+    while(beg < end)
+    {
+        if(*min > *beg) 
+            min = beg;
+        beg++;
+    }
+    
+    return min;
+}
+
+double *fun_find(double (*tab)[COLS], int rows)
+{
+    double *min_ptr = *tab;
+    
+    for(int i = 0; i < rows; i++)
+    {
+        double *min_in_row = find_min_ptr(*(tab+i), *(tab+i)+COLS);
+        
+        if(*min_in_row < *min_ptr)
+            min_ptr = min_in_row;
+    }
+
+    return min_ptr;
 }
