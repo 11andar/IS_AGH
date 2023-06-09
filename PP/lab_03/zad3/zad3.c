@@ -6,6 +6,7 @@
 
 void print_d(double *beg, double *end);
 double sum(double *beg, double *end);
+int row_number(double *beg, double *end);
 
 int main(void)
 {
@@ -41,9 +42,15 @@ int main(void)
     double sum_2 = sum(*(abc+rows_h)+cols_h, *(abc+ROWS));
     
     // print sum, sum_1, sum_2
-    printf("Sum of all elements: %.1f\n", sum_all);
+    printf("\nSum of all elements: %.1f\n", sum_all);
     printf("Sum of first half: %.1f\n", sum_1);
-    printf("Sum of first half: %.1f\n", sum_2);
+    printf("Sum of first half: %.1f\n\n", sum_2);
+    
+    // print max value and row containing it
+    int max_row = row_number(*abc, *(abc+ROWS));
+
+    printf("Row with max value: ");
+    print_d(*(abc+max_row), *(abc+max_row)+COLS);
     
     return 0;
 }
@@ -66,4 +73,22 @@ double sum(double *beg, double *end)
     }
 
     return sum_all;
+}
+
+int row_number(double *beg, double *end)
+{
+    double *max_ptr = beg;
+    double *ptr = beg;
+
+    while(ptr < end)
+    {
+        if(*ptr > *max_ptr)
+            max_ptr = ptr;
+        ptr++;
+    }
+
+    // print max value
+    printf("max: %.1f\n", *max_ptr);
+
+    return (max_ptr-beg)/COLS;
 }
