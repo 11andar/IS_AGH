@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+void wypisz_f(float *beg, float *end);
+
 int main(void) 
 {
     int size = 7;
@@ -22,5 +24,24 @@ int main(void)
     float **PTR = TAB_1;
     float **PTR_1 = TAB_1;
 
+    // print TAB_2 using PTR and wypisz_f
+    printf("TAB_2 -> ");
+    wypisz_f(*PTR, *PTR+size);
+    printf("\n");
+
+    // print TAB_1 without using int variable
+    printf("==== TAB_1 ====\n");
+    
+    for(PTR = TAB_1; PTR < TAB_1+size; PTR++)
+        printf("%p\n", *PTR);
+    printf("\n");
+
     return 0;
+}
+
+void wypisz_f (float *beg, float *end)
+{
+    while (beg < end)
+        printf ("%6.2f", *beg++);
+    printf ("\n");
 }
