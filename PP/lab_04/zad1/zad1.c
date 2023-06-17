@@ -6,6 +6,7 @@ void wypisz_f(float *beg, float *end);
 void print_arr(float *tab, int size);
 void print_ptr(float **tab, int size);
 void swap(float *a, float *b);
+void swap_ptr(float **a, float **b);
 
 int main(void) 
 {
@@ -52,6 +53,33 @@ int main(void)
     
     printf("\n");
 
+    // flip values of TAB_1 using PTR and PTR_1
+    PTR_1 = TAB_1;
+    
+    while(PTR_1 != PTR)
+    {
+        swap_ptr(PTR_1, PTR);
+        PTR_1++;
+        PTR--;
+    }
+
+    // print TAB_2 using TAB_1
+    printf("\nTAB_2 (TAB_1) -> ");
+    for(int i = 0; i < size; i++)
+        printf("%.2f ", *(*(TAB_1+i)));
+    
+    printf("\n");
+
+    // print TAB_2 using wypisz_f
+    printf("TAB_2 (wypisz_f) -> ");
+    wypisz_f(TAB_2, TAB_2+size);
+
+    // print TAB_1
+    printf("\n==== TAB_1 ====\n");
+    print_ptr(TAB_1, size);
+    
+    printf("\n");
+
     return 0;
 }
 
@@ -77,6 +105,13 @@ void print_ptr(float **tab, int size)
 void swap(float *a, float *b)
 {
     float temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void swap_ptr(float **a, float **b)
+{
+    float *temp = *a;
     *a = *b;
     *b = temp;
 }
