@@ -3,6 +3,9 @@
 #include <time.h>
 
 void wypisz_f(float *beg, float *end);
+void print_arr(float *tab, int size);
+void print_ptr(float **tab, int size);
+void swap(float *a, float *b);
 
 int main(void) 
 {
@@ -27,13 +30,26 @@ int main(void)
     // print TAB_2 using PTR and wypisz_f
     printf("TAB_2 -> ");
     wypisz_f(*PTR, *PTR+size);
-    printf("\n");
 
     // print TAB_1 without using int variable
-    printf("==== TAB_1 ====\n");
+    printf("\n==== TAB_1 ====\n");
     
     for(PTR = TAB_1; PTR < TAB_1+size; PTR++)
         printf("%p\n", *PTR);
+    
+    printf("\n");
+
+    // move TAB_2 one up using PTR and PTR_1
+    for(PTR = TAB_1, PTR_1 = PTR+1; PTR < TAB_1+size-1; PTR++, PTR_1++)
+        swap(*PTR, *PTR_1);
+
+    // print TAB_2 and TAB_1
+    printf("\nTAB_2 -> ");
+    print_arr(TAB_2, size);
+
+    printf("\n==== TAB_1 ====\n");
+    print_ptr(TAB_1, size);
+    
     printf("\n");
 
     return 0;
@@ -44,4 +60,23 @@ void wypisz_f (float *beg, float *end)
     while (beg < end)
         printf ("%6.2f", *beg++);
     printf ("\n");
+}
+
+void print_arr(float *tab, int size)
+{
+    for(int i = 0; i < size; i++)
+        printf("%.2f ", *(tab+i));
+}
+
+void print_ptr(float **tab, int size)
+{
+    for(int i = 0; i < size; i++)
+        printf("%p\n", *(tab+i));
+}
+
+void swap(float *a, float *b)
+{
+    float temp = *a;
+    *a = *b;
+    *b = temp;
 }
